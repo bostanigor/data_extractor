@@ -9,7 +9,7 @@ class DataExtractor
   def self.logger
     return @logger if instance_variable_defined? :@logger
 
-    log_file_path = File.expand_path('../../log.log', __FILE__)
+    log_file_path = File.expand_path('../../app.log', __FILE__)
     log_file = File.open(log_file_path, "a")
     @logger ||= Logger.new MultiIO.new(STDOUT, log_file)
     @logger.level = :info

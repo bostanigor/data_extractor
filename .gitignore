@@ -1,5 +1,5 @@
 app/tmp/*
-app/log.log
+app/*.log
 
 app/*.txt
 app/*.png
