@@ -1,4 +1,4 @@
-### Data Extractor
+# Data Extractor
 
 ## Requirements
 These utils need to be installed for gem to work
@@ -45,6 +45,6 @@ $ docker run -v ./input:/input/ --rm -it data_extractor -f /input/example.pdf -c
 # To run Rspec spec
 $ docker run -v --rm --entrypoint=rspec -it data_extractor
 
-# For easy development from inside of the container. This will also result in a `log.log` file for you to inspect locally
+# For easy development from inside of the container. This will also result in a `app.log` file for you to inspect locally
 $ docker run -v ./app/:/app -v ./input:/input --rm --entrypoint=bash -it data_extractor
 ```
