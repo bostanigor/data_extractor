@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+#
+require 'optparse'
+require_relative '../lib/data_extractor'
+
+class ArgParser
+  class InvalidMode < StandardError; end
+  class MissingInputFile < OptionParser::MissingArgument; end
+
+  VALID_OPERATIONS = %w[preview text all]
+
+  attr_reader :options
+
+  def parse(args)
+    @options = {}
+    OptionParser.new do |parser|
+      parser.on("-f FILEPATH", "Input .pdf|.png file") do |filepath|
+        @options[:filepath] = filepath
+      end
+
+      parser.on("-c OPERATION", "Parse mode (all|text|preview)") do |operation|
+        if not VALID_OPERATIONS.include? operation
+          raise InvalidMode, <<~TEXT
+            '#{operation}' is not a valid mode.
+            Please choose one of the valid options - '#{VALID_OPERATIONS.join("', '")}'
+          TEXT
+          exit
+        end
+
+        @options[:operation] = operation
+      end
+
+      parser.on("-o DIRPATH", "Output directory path") do |dirpath|
+        @options[:output_dirpath] = dirpath
+      end
+
+      parser.on("-h", "--help", "Help") do |opt|
+        puts parser
+        exit
+      end
+    end.parse!
+
+
+    raise MissingInputFile, "Specify input file path via '-f <FILEPATH>' option" if @options[:filepath] == nil
+
+    @options[:operation] ||= 'all'
+    @options
+  end
+end
+
+options = ArgParser.new.parse(ARGV)
+exit DataExtractor.new.run(**options)

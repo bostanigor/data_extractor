@@ -1,0 +1,9 @@
+app/tmp/*
+app/log.log
+
+app/*.txt
+app/*.png
+
+input/[!example]*
+
+!.keep
