@@ -15,7 +15,9 @@ $ bundle install
 ```
 
 A docker file can be used to build a standalone utility
-`docker build -t data_extractor ./app`
+```console
+$ docker build -t data_extractor ./app
+```
 
 ## Usage
 In ruby
@@ -39,12 +41,12 @@ Usage: data_extractor [options]
 To use docker you need to mount a volume with input and output directories. `-o` option is useful to specify output folder
 Examples:
 ```console
-# Run program for `input/example.pdf` file and output result in `input` folder
+Run program for `input/example.pdf` file and output result in `input` folder
 $ docker run -v ./input:/input/ --rm -it data_extractor -f /input/example.pdf -c text -o /input/
 
-# To run Rspec spec
+To run Rspec spec
 $ docker run -v --rm --entrypoint=rspec -it data_extractor
 
-# For easy development from inside of the container. This will also result in a `app.log` file for you to inspect locally
+For easy development from inside of the container. This will also result in a `app.log` file for you to inspect locally
 $ docker run -v ./app/:/app -v ./input:/input --rm --entrypoint=bash -it data_extractor
 ```
