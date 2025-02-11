@@ -2,7 +2,7 @@ FROM ruby:3.2-alpine3.20
 
 RUN mkdir app/
 COPY Gemfile ./app
-# COPY . app/
+COPY . app/
 WORKDIR app/
 
 ENV BUILD_PACKAGES bash curl curl-dev ruby-dev build-base yaml-dev
